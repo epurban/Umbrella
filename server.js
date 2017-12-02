@@ -47,12 +47,13 @@ app.route('/anon_story')
 
 app.route('/anon_story/:c_id')
 
-	var company_id = req.params.c_id;
+
 
 	// get story (accessed at GET http://localhost:8080/api/anon_story/ID)
 	.get(function(req, res) {
-		console.Log("get request for anon_story/" + anon_id); 
-		con.query("SELECT * FROM `anon_stories` WHERE `story_comp_id` = " + anon_id + ";", function (err, result) {
+        var company_id = req.params.c_id;
+		console.Log("get request for anon_story/" + company_id); 
+		con.query("SELECT * FROM `anon_stories` WHERE `story_comp_id` = '" + company_id + ";", function (err, result) {
 			if (err) throw err;
 			console.log("Result: " + result);
 			res.send(result);
