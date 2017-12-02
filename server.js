@@ -44,8 +44,13 @@ app.route('/anon_story')
 
     });
 
+// Get ALL Companies
 app.get('/companies', function (req, res) {
-	
+	con.query("SELECT `companies_name`, `companies_rating` FROM `companies`;", function (err, result) {
+		if (err) throw err;
+		console.log("Result: " + result);
+		res.send(result);
+	  });
 })
 
 app.listen(4000);
