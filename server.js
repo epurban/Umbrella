@@ -6,7 +6,8 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
   host: "localhost",
   user: "root",
-  password: "passw0rd"
+  password: "passw0rd",
+  database: "mlh_umbrella"
 });
 
 var app = express();
@@ -46,7 +47,7 @@ app.route('/anon_story')
 
 // Get ALL Companies
 app.get('/companies', function (req, res) {
-	con.query("SELECT `companies_name`, `companies_rating` FROM `companies`;", function (err, result) {
+	con.query("SELECT `company_name`, `company_rating` FROM `companies`;", function (err, result) {
 		if (err) throw err;
 		console.log("Result: " + result);
 		res.send(result);
