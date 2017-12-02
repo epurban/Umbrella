@@ -1,0 +1,45 @@
+db: mlh_umbrella
+un: root
+pw: passw0rd
+server: localhost
+
+--get all stories for a Company:
+SELECT * 
+FROM `anon_stories` JOIN 
+	`companies` ON
+    `companies`.`company_id` = `anon_stories`.`story_comp_id`;
+
+--get all companies:
+SELECT `company_name`, `company_rating` 
+FROM `companies`;
+
+--get A company
+SELECT *
+FROM `companies`
+WHERE `company_name` = $name;
+
+--Get the 5 worse rated companies:
+SELECT `company_name`, `company_rating`
+FROM `companies`
+WHERE ORDERBY `company_rating` ASC 
+LIMIT 5;
+
+--adding a Company
+INSERT 
+INTO 'companies' (`company_name`, `company_address`) 
+VALUES ($CompName, $CompAddr);
+
+--adding a Blurb
+INSERT 
+INTO `anon_stories` (`story_comp_id`, `story_blurb`, `story_rating`) 
+VALUES ($CompId, $StoryBlurb, $StoryRating);
+
+--update Company StoryRating
+UPDATE `companies` 
+SET `company_rating` = 
+(
+    SELECT SUM(`story_rating`)/COUNT(`story_id`)  
+    FROM `anon_stories`
+    JOIN `companies`
+    ON `stories_comp_id` = `company_id`
+)
