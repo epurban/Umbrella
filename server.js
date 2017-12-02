@@ -4,10 +4,10 @@ var bodyParser = require('body-parser');
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "passw0rd",
-  database: "mlh_umbrella"
+	host: "localhost",
+	user: "root",
+	password: "passw0rd",
+	database: "mlh_umbrella"
 });
 
 var app = express();
@@ -44,6 +44,21 @@ app.route('/anon_story')
         });
 
     });
+
+app.route('/anon_story/:c_id')
+
+	var company_id = req.params.c_id;
+
+	// get story (accessed at GET http://localhost:8080/api/anon_story/ID)
+	.get(function(req, res) {
+		console.Log("get request for anon_story/" + anon_id); 
+		con.query("SELECT * FROM `anon_stories` WHERE `story_comp_id` = " + anon_id + ";", function (err, result) {
+			if (err) throw err;
+			console.log("Result: " + result);
+			res.send(result);
+		  });
+    });
+
 
 // Get ALL Companies
 app.get('/companies', function (req, res) {
