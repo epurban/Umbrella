@@ -1,8 +1,7 @@
 --get all stories for a Company:
 SELECT * 
-FROM `anon_stories` JOIN 
-	`companies` ON
-    `companies`.`company_id` = `anon_stories`.`story_comp_id`;
+FROM `anon_stories` 
+WHERE `story_comp_id` = $id;
 
 --get all companies:
 SELECT `companies_name`, `companies_rating` 
@@ -39,3 +38,5 @@ SET `companies_rating` =
     ON `stories_comp_id` = `companies_id`
     WHERE `stories_comp_id` = $CompId
 )
+
+for this noob
