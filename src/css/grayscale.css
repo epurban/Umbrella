@@ -148,6 +148,10 @@ a:focus {
     font-size: 18px;
 }
 
+.description em {
+font-size: 18px;
+  color: #ffff;
+}
 @media(min-width:767px) {
     .intro {
         height: 100%;
